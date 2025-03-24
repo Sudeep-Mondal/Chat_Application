@@ -30,7 +30,7 @@ const ChatBox = () => {
 
            if (userChatsSnapshot.exists()) {
             const userChatData = userChatsSnapshot.data();
-            const chatIndex = userChatData.chatsData.findIndex((c)=>c.messageId === messagesId);
+            const chatIndex = userChatData?.chatsData?.findIndex((c)=>c.messageId === messagesId);
             userChatData.chatsData[chatIndex].lastMessage = input.slice(0,30);
             userChatData.chatsData[chatIndex].updatedAt = Date.now();
             if(userChatData.chatsData[chatIndex].rId === userData.id){

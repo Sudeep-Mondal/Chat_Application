@@ -40,8 +40,8 @@ const ProfileUpdate = () => {
             }
             else{
                 await updateDoc(docRef,{
-                    bio:bio,
-                    name:name
+                    bio:bio ??'',
+                    name:name ?? ''
                 })
             }
             const snap= await getDoc(docRef);
@@ -86,7 +86,7 @@ const ProfileUpdate = () => {
                     Upload profile image
                 </label>
                 <input onChange={(e)=>setName(e.target.value)} value={name} type="text" placeholder='Your name' required />
-                <textarea onChange={(e)=>setBio(e.target.bio)} value={bio} placeholder='Write profile bio' required></textarea>
+                <textarea onChange={(e)=>setBio(e.target.value)} value={bio} placeholder='Write profile bio' required></textarea>
                 <button type='sumit'>Save</button>
             </form>
             <img className='profile-pic' src={image? URL.createObjectURL(image) : prevImage ? prevImage : assets.logo_icon} alt="" />

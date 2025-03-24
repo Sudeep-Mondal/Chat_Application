@@ -19,9 +19,13 @@ const AppContextProvider = (props) => {
         try {
             const userRef = doc(db,'users',uid);
             const userSnap = await getDoc(userRef);
-            const userData = userSnap.data();
-            setUserData(userData);
-            if(userData.avatar && userData.name){
+            const data = userSnap.data();
+            if(!data) {
+                navigate('/');
+                return
+            }
+            setUserData(data);
+            if(data.avatar && data.name){
                 navigate('/chat');
             }
             else{
@@ -37,8 +41,9 @@ const AppContextProvider = (props) => {
                     })
                 }
             },60000)
+            return data
         } catch (error) {
-            
+            console.log('error>>>', error)
         }
     }
 
